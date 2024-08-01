@@ -1,0 +1,38 @@
+services:
+  database:
+    container_name: database
+    image: postgres:16.3-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    networks:
+      - news_net
+    environment:
+      POSTGRES_PASSWORD: kubenews
+      POSTGRES_USER: kubenews
+      POSTGRES_DB: kubenews
+
+  app:
+    container_name: app
+    image: kubedevio/kube-news:v1
+    ports:
+      - 8080:8080
+    networks:
+      - news_net
+    environment:
+      DB_PASSWORD: kubenews
+      DB_USERNAME: kubenews
+      DB_DATABASE: kubenews
+      DB_HOST: database
+    depends_on:
+      - database
+
+volumes:
+  postgres_volume:
+    name: news-volume
+
+networks:
+  news_net:
+    driver: bridge
+    name: news-network
