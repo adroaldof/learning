@@ -1,0 +1,15 @@
+services:
+  web:
+    container_name: web
+    image: kubedevio/simulador-do-caos:v1
+    ports:
+      - 8080:3000
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      timeout: 5s
+      interval: 10s
+      retries: 3
+      start_period: 30s
+      # disable: true # when dockerfile has a healthcheck and it requires to be disabled in compose
+
