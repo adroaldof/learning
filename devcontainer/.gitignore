@@ -10,8 +10,9 @@ node_modules/
 # Accept these files
 ###############################################################################
 
+!.devcontainer/
+!.dockerignore
 !.editorconfig
 !.gitignore
 !.nvmrc
-!.devcontainer/
-!.dockerignore
+!.vscode/

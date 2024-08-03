@@ -1,0 +1,9 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../devcontainer:/app # host directory:container work directory in Dockerfile
+    ports:
+      - 3000:3000
