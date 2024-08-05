@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bluewebcolor
+  labels:
+    app: bluewebcolor
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bluewebcolor
+  template:
+    metadata:
+      labels:
+        app: bluewebcolor
+    spec:
+      containers:
+        - name: bluewebcolor
+          image: local/image:latest
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          resources: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bluewebcolor
+  labels:
+    app: bluewebcolor
+spec:
+  type: ClusterIP
+  selector:
+    app: bluewebcolor # Select the pods with the label app=bluewebcolor
+  ports:
+    - name: http
+      port: 80 # Expose the service on port 80
+      targetPort: 80 # Forward traffic to port 80 of the deployment pod
+      protocol: TCP
