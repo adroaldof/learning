@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webcolor1
+  labels:
+    app: webcolor
+    version: blue
+spec:
+  containers:
+    - name: webcolor1
+      image: kubedevio/web-color:blue
+      ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+      resources: {}
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webcolor2
+  labels:
+    app: webcolor
+    version: green
+spec:
+  containers:
+    - name: webcolor2
+      image: kubedevio/web-color:green
+      ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+      resources: {}

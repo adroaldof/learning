@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: webcolor
+  labels:
+    app: webcolor
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: webcolor
+  template:
+    metadata:
+      labels:
+        app: webcolor
+    spec:
+      containers:
+        - name: webcolor
+          image: kubedevio/web-color:green
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          resources: {}
